@@ -15,22 +15,23 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import bralis.model.Artikl;
-import bralis.service.ArtiklService;
+import bralis.model.Nalog;
+import bralis.service.NalogService;
 
 @RestController
 @CrossOrigin
-public class ArtiklController {
-	
+public class NalogController {
+
+
 	@Autowired
-	private ArtiklService service;
+	private NalogService service;
 	
-	@GetMapping("/artikl")
-	public List<Artikl> getAll(){
+	@GetMapping("/nalog")
+	public List<Nalog> getAll(){
 		return service.getAll();
 	}
 	
-	@GetMapping("/artikl/{id}")
+	@GetMapping("/nalog/{id}")
 	public ResponseEntity<?> getById(@PathVariable long id){
 		if(service.existsById(id)) {
 			return ResponseEntity.ok(service.findById(id).get());
@@ -40,32 +41,26 @@ public class ArtiklController {
 		}
 	}
 	
-	@GetMapping("artikl/sifra/{sifra}")
-	public ResponseEntity<List<Artikl>> getBySifra(@PathVariable("sifra") String sifra){
-		List<Artikl> artikli = service.findBySifra(sifra);
-        return new ResponseEntity<>(artikli, HttpStatus.OK);
-	}
-	
-	@PostMapping("artikl")
-    public ResponseEntity<Artikl> add(@RequestBody Artikl artikl) {
-        Artikl savedArtikl = service.save(artikl);
-        URI location = URI.create("/artikl/" + savedArtikl.getId());
-        return ResponseEntity.created(location).body(savedArtikl);
+	@PostMapping("nalog")
+    public ResponseEntity<Nalog> add(@RequestBody Nalog nalog) {
+		Nalog savedNalog = service.save(nalog);
+        URI location = URI.create("/nalog/" + savedNalog.getId());
+        return ResponseEntity.created(location).body(savedNalog);
     }
 	
-	@PutMapping("/artikl/{id}")
-	public ResponseEntity<?> update(@RequestBody Artikl artikl, @PathVariable long id){
+	@PutMapping("/nalog/{id}")
+	public ResponseEntity<?> update(@RequestBody Nalog nalog, @PathVariable long id){
 		if(service.existsById(id)) {
-			artikl.setId(id);
-			Artikl savedArtikl = service.save(artikl);
-			return ResponseEntity.ok(savedArtikl);
+			nalog.setId(id);
+			Nalog savedNalog = service.save(nalog);
+			return ResponseEntity.ok(savedNalog);
 		}else {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).
 					body("Resource with requested ID: " + id + " has not been found");
 		}
 	}
 	
-	@DeleteMapping("/artikl/{id}")
+	@DeleteMapping("/nalog/{id}")
 	public ResponseEntity<String> delete(@PathVariable long id){
 		if(service.existsById(id)) {
 			service.deleteById(id);
@@ -75,5 +70,4 @@ public class ArtiklController {
 					.body("Resource with requested ID: " + id + " has not been found");
 		}
 	}
-
 }

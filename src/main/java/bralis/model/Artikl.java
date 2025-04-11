@@ -35,7 +35,7 @@ public class Artikl {
     @SequenceGenerator(name = "artikl_seq", allocationSize = 1)
     private Long id;
 
-    @Column
+	@Column(unique = true)
     private String sifra;
     
     @Column
@@ -47,8 +47,4 @@ public class Artikl {
     @Column
     private double stanje;
     
-    @OneToMany(mappedBy="artikl")
-	@JsonIgnore
-	private List<Transakcija> transakcije;
-	
 }

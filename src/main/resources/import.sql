@@ -14,7 +14,20 @@ INSERT INTO "artikl"("id", "sifra", "naziv", "stanje", "jedinica") VALUES(nextva
 INSERT INTO "kupac"("id", "naziv", "adresa", "postanski_broj", "grad") VALUES(nextval('kupac_seq'), 'Marković d.o.o.', 'Spasovdanska 34', '71 123', 'Istočno Sarajevo');
 INSERT INTO "kupac"("id", "naziv", "adresa", "postanski_broj", "grad") VALUES(nextval('kupac_seq'), 'Laguna', 'Vuka Karadžića 13', '71 123', 'Istočno Sarajevo');
 INSERT INTO "kupac"("id", "naziv", "adresa", "postanski_broj", "grad") VALUES(nextval('kupac_seq'), 'Bingo', 'V. R. Putnika 55', '71 123', 'Istočno Sarajevo');
+INSERT INTO "kupac"("id", "naziv", "adresa", "postanski_broj", "grad") VALUES(nextval('kupac_seq'), 'Marković d.o.o.', 'Spasovdanska 34', '71 123', 'Istočno Sarajevo');
+INSERT INTO "kupac"("id", "naziv", "adresa", "postanski_broj", "grad") VALUES(nextval('kupac_seq'), 'Laguna', 'Vuka Karadžića 13', '71 123', 'Istočno Sarajevo');
+INSERT INTO "kupac"("id", "naziv", "adresa", "postanski_broj", "grad") VALUES(nextval('kupac_seq'), 'Bingo', 'V. R. Putnika 55', '71 123', 'Istočno Sarajevo');
+INSERT INTO "kupac"("id", "naziv", "adresa", "postanski_broj", "grad") VALUES(nextval('kupac_seq'), 'Marković d.o.o.', 'Spasovdanska 34', '71 123', 'Istočno Sarajevo');
+INSERT INTO "kupac"("id", "naziv", "adresa", "postanski_broj", "grad") VALUES(nextval('kupac_seq'), 'Laguna', 'Vuka Karadžića 13', '71 123', 'Istočno Sarajevo');
+INSERT INTO "kupac"("id", "naziv", "adresa", "postanski_broj", "grad") VALUES(nextval('kupac_seq'), 'Bingo', 'V. R. Putnika 55', '71 123', 'Istočno Sarajevo');
 
 
-INSERT INTO "transakcija"("id", "datum", "kolicina", "opis", "artikl") VALUES(nextval('transakcija_seq'), '25.03.2025.',  15.0, 'Opis', 1);
-INSERT INTO "transakcija"("id", "datum", "kolicina", "opis", "artikl") VALUES(nextval('transakcija_seq'), '24.03.2025.',  5.0, 'Opis', 1);
+INSERT INTO "transakcija"("id", "datum", "kolicina", "novo_stanje", "opis", "artikl", "jedinica") VALUES(nextval('transakcija_seq'), '25.03.2025.',  15.0, 20, 'Opis', 'E44 - Šarafciger', 'kom');
+INSERT INTO "transakcija"("id", "datum", "kolicina", "novo_stanje", "opis", "artikl", "jedinica") VALUES(nextval('transakcija_seq'), '24.03.2025.',  5.0, 10, 'Opis', 'E45 - Šaraf', 'kom');
+
+INSERT INTO "nalog"("id", "broj", "datum", "kupac", "zavrsen") VALUES(nextval('nalog_seq'), 'RN-01', '25.03.2025.', 1, true);
+INSERT INTO "nalog"("id", "broj", "datum", "kupac", "zavrsen") VALUES(nextval('nalog_seq'), 'RN-02', null, 1, false);
+
+INSERT INTO "stavka"("id", "nalog", "sifra", "artikl", "kolicina", "jedinica") VALUES(nextval('stavka_seq'), 1,'E44', 'Šarafciger', 5, 'kom');
+INSERT INTO "stavka"("id", "nalog", "sifra", "artikl", "kolicina", "jedinica") VALUES(nextval('stavka_seq'), 1,'E45', 'Šaraf', 3, 'kom');
+INSERT INTO "stavka"("id", "nalog", "sifra", "artikl", "kolicina", "jedinica") VALUES(nextval('stavka_seq'), 2,'E45', 'Šaraf', 3, 'kom');

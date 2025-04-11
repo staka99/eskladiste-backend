@@ -14,7 +14,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -27,31 +26,31 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "transakcija", schema = "public")
+@Table(name = "nalog", schema = "public")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-public class Transakcija {
+public class Nalog {
+	
 
 	@Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "transakcija_seq")
-    @SequenceGenerator(name = "transakcija_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "nalog_seq")
+    @SequenceGenerator(name = "nalog_seq", allocationSize = 1)
     private Long id;
+	
+    @Column
+    private String broj;
 
     @Column
     private Date datum;
+
+	@ManyToOne
+	@JoinColumn(name="kupac")
+	private Kupac kupac;
+
+    @Column
+    private boolean zavrsen;
     
-    @Column
-    private double kolicina;
+    @OneToMany(mappedBy="nalog")
+	@JsonIgnore
+	private List<Stavka> stavke;
 
-    @Column
-    private double novoStanje;
-
-    @Column
-    private String opis;
-    
-    @Column
-    private String artikl;
-
-    @Column
-    private String jedinica;
-	
 }

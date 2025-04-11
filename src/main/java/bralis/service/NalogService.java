@@ -6,30 +6,25 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import bralis.model.Artikl;
-import bralis.repository.ArtiklRepository;
+import bralis.model.Nalog;
+import bralis.repository.NalogRepository;
 
 @Service
-public class ArtiklService {
-	
+public class NalogService {
+
 	@Autowired
-	private ArtiklRepository repository;
+	private NalogRepository repository;
 	
-	
-	public List<Artikl> getAll(){
+	public List<Nalog> getAll(){
 		return repository.findAll();
 	}
 	
-	public Optional<Artikl> findById(long id){
+	public Optional<Nalog> findById(long id){
 		return repository.findById(id);
-	}
+	}	
 	
-	public List<Artikl> findBySifra(String naziv) {
-        return repository.findBySifra(naziv);
-    }
-	
-	public Artikl save(Artikl artikl) {
-		return repository.save(artikl);
+	public Nalog save(Nalog nalog) {
+		return repository.save(nalog);
 	}
 	
 	public boolean existsById(long id) {
@@ -39,5 +34,6 @@ public class ArtiklService {
 	public void deleteById(long id) {
 		repository.deleteById(id);
 	}
-
+	
+	
 }

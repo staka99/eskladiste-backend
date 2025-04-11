@@ -47,8 +47,9 @@ public class Kupac {
     @Column
     private String grad;
     
-    /*@OneToMany(mappedBy="kupac")
+    @OneToMany(mappedBy="kupac")
 	@JsonIgnore
-	private List<Transakcija> transakcije;*/
+	private List<Nalog> nalozi;
+    
 	
 }
