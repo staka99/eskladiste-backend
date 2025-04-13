@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import bralis.model.Artikl;
 import bralis.model.Stavka;
 import bralis.repository.StavkaRepository;
 
@@ -22,6 +23,10 @@ public class StavkaService {
 	public Optional<Stavka> findById(long id){
 		return repository.findById(id);
 	}	
+	
+	public List<Stavka> findBySifra(String naziv) {
+        return repository.findBySifra(naziv);
+    }
 	
 	public Stavka save(Stavka stavka) {
 		return repository.save(stavka);

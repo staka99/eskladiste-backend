@@ -9,4 +9,5 @@ import bralis.model.Stavka;
 public interface StavkaRepository extends JpaRepository<Stavka, Long>{
 
 	List<Stavka> findByNalogId(Long nalogId);
+	List<Stavka> findBySifra(String sifra);
 }
