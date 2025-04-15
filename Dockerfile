@@ -3,8 +3,8 @@ FROM maven:3.9.6-eclipse-temurin-17 AS build
 WORKDIR /app
 
 # Copy Maven project files
-COPY bralis/pom.xml .
-COPY bralis/src ./src
+COPY /pom.xml .
+COPY /src ./src
 
 # Build the application (skip tests for faster build)
 RUN mvn clean package -DskipTests
