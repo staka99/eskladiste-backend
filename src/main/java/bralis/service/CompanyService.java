@@ -6,26 +6,26 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import bralis.model.Artikl;
-import bralis.model.Nalog;
-import bralis.repository.NalogRepository;
+import bralis.model.Company;
+import bralis.repository.CompanyRepository;
 
 @Service
-public class NalogService {
-
+public class CompanyService {
 	@Autowired
-	private NalogRepository repository;
+	private CompanyRepository repository;
 	
-	public List<Nalog> getAll(){
+	
+	public List<Company> getAll(){
 		return repository.findAll();
 	}
 	
-	public Optional<Nalog> findById(long id){
+	public Optional<Company> findById(long id){
 		return repository.findById(id);
-	}	
+	}
 	
-	public Nalog save(Nalog nalog) {
-		return repository.save(nalog);
+	
+	public Company save(Company company) {
+		return repository.save(company);
 	}
 	
 	public boolean existsById(long id) {
@@ -35,8 +35,5 @@ public class NalogService {
 	public void deleteById(long id) {
 		repository.deleteById(id);
 	}
-	
-	public List<Nalog> getNaloziByCompany(Long companyId) {
-        return repository.findByCompanyId(companyId);
-    }
+
 }

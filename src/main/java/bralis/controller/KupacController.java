@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import bralis.model.Artikl;
 import bralis.model.Kupac;
 import bralis.service.KupacService;
 
@@ -69,4 +70,13 @@ public class KupacController {
 					.body("Resource with requested ID: " + id + " has not been found");
 		}
 	}
+	
+	@GetMapping("/kupac-company/{id}")
+	  public ResponseEntity<List<Kupac>> getKupciByCompany(@PathVariable Long id) {
+	      List<Kupac> kupci = service.getKupciByCompany(id);
+	      if (kupci.isEmpty()) {
+	          return ResponseEntity.noContent().build();
+	      }
+	      return ResponseEntity.ok(kupci);
+	  }
 }

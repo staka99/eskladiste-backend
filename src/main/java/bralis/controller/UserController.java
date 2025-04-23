@@ -15,23 +15,24 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import bralis.model.Artikl;
-import bralis.service.ArtiklService;
+import bralis.model.User;
+import bralis.security.AuthenticationRequest;
+import bralis.security.AuthenticationResponse;
+import bralis.service.UserService;
 
 @RestController
 @CrossOrigin
-public class ArtiklController {
-	
+public class UserController {
 	@Autowired
-	private ArtiklService service;
+	private UserService service;
 	
-	@GetMapping("/artikl")
-	public List<Artikl> getAll(){
+	@GetMapping("/user")
+	public List<User> getAll(){
 		return service.getAll();
 	}
 	
-	@GetMapping("/artikl/{id}")
-	public ResponseEntity<?> getById(@PathVariable long id){
+	@GetMapping("/user/{id}")
+	public ResponseEntity<?> getAById(@PathVariable long id){
 		if(service.existsById(id)) {
 			return ResponseEntity.ok(service.findById(id).get());
 		}else {
@@ -40,32 +41,33 @@ public class ArtiklController {
 		}
 	}
 	
-	@GetMapping("artikl/sifra/{sifra}")
-	public ResponseEntity<List<Artikl>> getBySifra(@PathVariable("sifra") String sifra){
-		List<Artikl> artikli = service.findBySifra(sifra);
-        return new ResponseEntity<>(artikli, HttpStatus.OK);
-	}
-	
-	@PostMapping("artikl")
-    public ResponseEntity<Artikl> add(@RequestBody Artikl artikl) {
-        Artikl savedArtikl = service.save(artikl);
-        URI location = URI.create("/artikl/" + savedArtikl.getId());
-        return ResponseEntity.created(location).body(savedArtikl);
+	@PostMapping("/register")
+    public ResponseEntity<User> add(@RequestBody User user) {
+		User savedUser = service.save(user);
+        URI location = URI.create("/user/" + savedUser.getId());
+        return ResponseEntity.created(location).body(savedUser);
     }
 	
-	@PutMapping("/artikl/{id}")
-	public ResponseEntity<?> update(@RequestBody Artikl artikl, @PathVariable long id){
+	@PostMapping("/login")
+	  public ResponseEntity<AuthenticationResponse> authenticate(
+	      @RequestBody AuthenticationRequest authenticationRequest
+	  ) {
+	    return ResponseEntity.ok(service.authenticate(authenticationRequest));
+	  }
+	
+	@PutMapping("/user/{id}")
+	public ResponseEntity<?> update(@RequestBody User user, @PathVariable long id){
 		if(service.existsById(id)) {
-			artikl.setId(id);
-			Artikl savedArtikl = service.save(artikl);
-			return ResponseEntity.ok(savedArtikl);
+			user.setId(id);
+			User savedUser = service.save(user);
+			return ResponseEntity.ok(savedUser);
 		}else {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).
 					body("Resource with requested ID: " + id + " has not been found");
 		}
 	}
 	
-	@DeleteMapping("/artikl/{id}")
+	@DeleteMapping("/user/{id}")
 	public ResponseEntity<String> delete(@PathVariable long id){
 		if(service.existsById(id)) {
 			service.deleteById(id);
@@ -75,14 +77,5 @@ public class ArtiklController {
 					.body("Resource with requested ID: " + id + " has not been found");
 		}
 	}
-	
-	@GetMapping("/artikl-company/{id}")
-	  public ResponseEntity<List<Artikl>> getArtiklByCompany(@PathVariable Long id) {
-	      List<Artikl> artikli = service.getArtiklByCompany(id);
-	      if (artikli.isEmpty()) {
-	          return ResponseEntity.noContent().build();
-	      }
-	      return ResponseEntity.ok(artikli);
-	  }
 
 }

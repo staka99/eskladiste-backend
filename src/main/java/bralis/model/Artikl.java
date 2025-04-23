@@ -16,6 +16,7 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -26,25 +27,28 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "artikl", schema = "public")
+@Table(name = "artikl", schema = "public", uniqueConstraints = @UniqueConstraint(columnNames = {"sifra", "company"})) 
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Artikl {
 
-	@Id
+    @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "artikl_seq")
     @SequenceGenerator(name = "artikl_seq", allocationSize = 1)
     private Long id;
 
-	@Column(unique = true)
+    @Column
     private String sifra;
-    
+
     @Column
     private String naziv;
 
     @Column
     private String jedinica;
-    
+
     @Column
     private double stanje;
-    
+
+    @ManyToOne
+    @JoinColumn(name = "company") 
+    private Company company;
 }

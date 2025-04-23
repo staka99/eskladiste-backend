@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import bralis.model.Artikl;
 import bralis.model.Transakcija;
 import bralis.repository.TransakcijaRepository;
 
@@ -34,4 +35,8 @@ public class TransakcijaService {
 	public void deleteById(long id) {
 		repository.deleteById(id);
 	}
+
+	public List<Transakcija> getTransakcijeByCompany(Long companyId) {
+        return repository.findByCompanyId(companyId);
+    }
 }

@@ -15,23 +15,23 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import bralis.model.Artikl;
-import bralis.service.ArtiklService;
+import bralis.model.Company;
+import bralis.service.CompanyService;
 
 @RestController
 @CrossOrigin
-public class ArtiklController {
+public class CompanyController {
 	
 	@Autowired
-	private ArtiklService service;
+	private CompanyService service;
 	
-	@GetMapping("/artikl")
-	public List<Artikl> getAll(){
+	@GetMapping("/company")
+	public List<Company> getAll(){
 		return service.getAll();
 	}
 	
-	@GetMapping("/artikl/{id}")
-	public ResponseEntity<?> getById(@PathVariable long id){
+	@GetMapping("/company/{id}")
+	public ResponseEntity<?> getAById(@PathVariable long id){
 		if(service.existsById(id)) {
 			return ResponseEntity.ok(service.findById(id).get());
 		}else {
@@ -40,32 +40,26 @@ public class ArtiklController {
 		}
 	}
 	
-	@GetMapping("artikl/sifra/{sifra}")
-	public ResponseEntity<List<Artikl>> getBySifra(@PathVariable("sifra") String sifra){
-		List<Artikl> artikli = service.findBySifra(sifra);
-        return new ResponseEntity<>(artikli, HttpStatus.OK);
-	}
-	
-	@PostMapping("artikl")
-    public ResponseEntity<Artikl> add(@RequestBody Artikl artikl) {
-        Artikl savedArtikl = service.save(artikl);
-        URI location = URI.create("/artikl/" + savedArtikl.getId());
-        return ResponseEntity.created(location).body(savedArtikl);
+	@PostMapping("company")
+    public ResponseEntity<Company> add(@RequestBody Company company) {
+        Company savedCompany = service.save(company);
+        URI location = URI.create("/company/" + savedCompany.getId());
+        return ResponseEntity.created(location).body(savedCompany);
     }
 	
-	@PutMapping("/artikl/{id}")
-	public ResponseEntity<?> update(@RequestBody Artikl artikl, @PathVariable long id){
+	@PutMapping("/company/{id}")
+	public ResponseEntity<?> update(@RequestBody Company company, @PathVariable long id){
 		if(service.existsById(id)) {
-			artikl.setId(id);
-			Artikl savedArtikl = service.save(artikl);
-			return ResponseEntity.ok(savedArtikl);
+			company.setId(id);
+			Company savedCompany = service.save(company);
+			return ResponseEntity.ok(savedCompany);
 		}else {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).
 					body("Resource with requested ID: " + id + " has not been found");
 		}
 	}
 	
-	@DeleteMapping("/artikl/{id}")
+	@DeleteMapping("/company/{id}")
 	public ResponseEntity<String> delete(@PathVariable long id){
 		if(service.existsById(id)) {
 			service.deleteById(id);
@@ -75,14 +69,5 @@ public class ArtiklController {
 					.body("Resource with requested ID: " + id + " has not been found");
 		}
 	}
-	
-	@GetMapping("/artikl-company/{id}")
-	  public ResponseEntity<List<Artikl>> getArtiklByCompany(@PathVariable Long id) {
-	      List<Artikl> artikli = service.getArtiklByCompany(id);
-	      if (artikli.isEmpty()) {
-	          return ResponseEntity.noContent().build();
-	      }
-	      return ResponseEntity.ok(artikli);
-	  }
 
 }

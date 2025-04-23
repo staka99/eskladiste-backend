@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import bralis.model.Artikl;
 import bralis.model.Kupac;
 import bralis.repository.KupacRepository;
 
@@ -34,6 +35,9 @@ public class KupacService {
 	public void deleteById(long id) {
 		repository.deleteById(id);
 	}
-	
+
+	public List<Kupac> getKupciByCompany(Long companyId) {
+        return repository.findByCompanyId(companyId);
+    }
 	
 }

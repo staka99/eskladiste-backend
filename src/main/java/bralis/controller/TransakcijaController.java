@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import bralis.model.Stavka;
 import bralis.model.Transakcija;
 import bralis.service.TransakcijaService;
 
@@ -69,4 +70,13 @@ public class TransakcijaController {
 					.body("Resource with requested ID: " + id + " has not been found");
 		}
 	}
+	
+	@GetMapping("/transakcija-company/{id}")
+	  public ResponseEntity<List<Transakcija>> getTransakcijeByCompany(@PathVariable Long id) {
+	      List<Transakcija> transakcije = service.getTransakcijeByCompany(id);
+	      if (transakcije.isEmpty()) {
+	          return ResponseEntity.noContent().build();
+	      }
+	      return ResponseEntity.ok(transakcije);
+	  }
 }

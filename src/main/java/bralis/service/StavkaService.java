@@ -44,5 +44,4 @@ public class StavkaService {
         return repository.findByNalogId(nalogId);
     }
 	
-	
 }

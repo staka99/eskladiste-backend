@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import bralis.model.Artikl;
+import bralis.model.Kupac;
 import bralis.model.Nalog;
 import bralis.service.NalogService;
 
@@ -70,4 +72,13 @@ public class NalogController {
 					.body("Resource with requested ID: " + id + " has not been found");
 		}
 	}
+	
+	@GetMapping("/nalog-company/{id}")
+	  public ResponseEntity<List<Nalog>> getNaloziByCompany(@PathVariable Long id) {
+	      List<Nalog> nalozi = service.getNaloziByCompany(id);
+	      if (nalozi.isEmpty()) {
+	          return ResponseEntity.noContent().build();
+	      }
+	      return ResponseEntity.ok(nalozi);
+	  }
 }

@@ -51,5 +51,9 @@ public class Kupac {
 	@JsonIgnore
 	private List<Nalog> nalozi;
     
+    @ManyToOne
+	@JoinColumn(name="company")
+    private Company company;
+    
 	
 }

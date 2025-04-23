@@ -39,5 +39,9 @@ public class ArtiklService {
 	public void deleteById(long id) {
 		repository.deleteById(id);
 	}
+	
+	public List<Artikl> getArtiklByCompany(Long companyId) {
+        return repository.findByCompanyId(companyId);
+    }
 
 }

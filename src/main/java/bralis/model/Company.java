@@ -1,6 +1,5 @@
 package bralis.model;
 
-import java.util.Date;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -21,41 +20,43 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import bralis.model.User;
 
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "transakcija", schema = "public")
+@Table(name = "company", schema = "public")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-public class Transakcija {
-
-	@Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "transakcija_seq")
-    @SequenceGenerator(name = "transakcija_seq", allocationSize = 1)
-    private Long id;
-
-    @Column
-    private Date datum;
-    
-    @Column
-    private double kolicina;
-
-    @Column
-    private double novoStanje;
-
-    @Column
-    private String opis;
-    
-    @Column
-    private String artikl;
-
-    @Column
-    private String jedinica;
-    
-    @ManyToOne
-	@JoinColumn(name="company")
-    private Company company;
+public class Company{
 	
+	@Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "company_seq")
+    @SequenceGenerator(name = "company_seq", allocationSize = 1)
+    private Long id;
+	
+	@Column
+    private String name;
+	
+    @OneToMany(mappedBy="company")
+	@JsonIgnore
+	private List<User> users;
+    
+    @OneToMany(mappedBy="company")
+	@JsonIgnore
+	private List<Transakcija> transakcije;
+    
+    @OneToMany(mappedBy="company")
+	@JsonIgnore
+	private List<Nalog> nalozi;
+	
+    @OneToMany(mappedBy="company")
+	@JsonIgnore
+	private List<Kupac> kupci;
+    
+    @OneToMany(mappedBy="company")
+	@JsonIgnore
+	private List<Artikl> artikli;
+
 }

@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import bralis.model.Artikl;
+import bralis.model.Nalog;
 import bralis.model.Stavka;
 import bralis.repository.StavkaRepository;
 import bralis.service.StavkaService;
@@ -88,4 +89,5 @@ public class StavkaController {
 	      }
 	      return ResponseEntity.ok(stavke);
 	  }
+	
 }

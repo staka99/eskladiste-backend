@@ -29,12 +29,11 @@ public class SecurityConfig {
 	            .csrf()
 	                .disable() // Disable CSRF protection (stateless JWT authentication)
 	            .authorizeRequests()
-//	                .requestMatchers("/register", "/login", "/publication", "/package") // Allow these routes without authentication
+//	                .requestMatchers("/register", "/login") // Allow these routes without authentication
 	                .requestMatchers("/*/**") // Allow these routes without authentication
 	                    .permitAll()
-	                .requestMatchers("/*.pdf").permitAll() // Omogućava PDF fajlove u root-u
-	                .requestMatchers("/admin/**") // Restrict access to admin routes
-	                    .hasRole("ADMIN") // Only users with "ADMIN" role can access /admin/**
+//                .requestMatchers("/artikl") // Restrict access to admin routes
+//	                    .hasRole("ADMIN") // Only users with "ADMIN" role can access /admin/**
 	                .anyRequest() // Any other request must be authenticated
 	                    .authenticated()
 	            .and()
