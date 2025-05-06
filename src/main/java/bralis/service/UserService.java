@@ -39,7 +39,7 @@ public class UserService {
 	public User save(User user) {
 		var dbUser = User.builder()
 				.username(user.getUsername())
-				//.company(user.getCompany())
+				.company(user.getCompany())
 				.password(passwordEncoder.encode(user.getPassword()))
 				.role(user.getRole())
 				.build();

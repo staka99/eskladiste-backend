@@ -39,6 +39,9 @@ public class Kupac {
     private String naziv;
     
     @Column
+    private String jib;
+    
+    @Column
     private String adresa;
     
     @Column

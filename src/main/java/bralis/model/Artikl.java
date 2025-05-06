@@ -47,6 +47,9 @@ public class Artikl {
 
     @Column
     private double stanje;
+    
+    @Column
+    private double cijena;
 
     @ManyToOne
     @JoinColumn(name = "company") 

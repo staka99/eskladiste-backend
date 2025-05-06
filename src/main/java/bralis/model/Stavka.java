@@ -49,4 +49,7 @@ public class Stavka {
     @Column
     private String jedinica;
     
+    @Column
+    private double cijena;
+    
 }

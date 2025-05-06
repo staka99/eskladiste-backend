@@ -53,6 +53,12 @@ public class Transakcija {
 
     @Column
     private String jedinica;
+
+    @Column
+    private double ulaz;
+
+    @Column
+    private double izlaz;
     
     @ManyToOne
 	@JoinColumn(name="company")
