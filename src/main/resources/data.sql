@@ -6,8 +6,8 @@ INSERT INTO company (id, name)
 SELECT nextval('company_seq'), 'Bralis'
 WHERE NOT EXISTS (SELECT 1 FROM company WHERE name = 'Bralis');
 
-INSERT INTO artikl (id, sifra, naziv, jedinica, stanje, cijena)
-SELECT nextval('artikl_seq'), 'X', 'X', 'X', 0, 0
+INSERT INTO artikl (id, sifra, naziv, jedinica, stanje, cijena, company)
+SELECT nextval('artikl_seq'), 'X', 'X', 'X', 0, 0, 1
 WHERE NOT EXISTS (SELECT 1 FROM artikl WHERE naziv = 'X');
 
 INSERT INTO app_user (id, username, password, role, company)
