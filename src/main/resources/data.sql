@@ -1,5 +1,3 @@
-DELETE 
-
 INSERT INTO company (id, name)
 SELECT nextval('company_seq'), 'T&M'
 WHERE NOT EXISTS (SELECT 1 FROM company WHERE name = 'T&M');
