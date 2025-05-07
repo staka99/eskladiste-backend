@@ -8,7 +8,7 @@ WHERE NOT EXISTS (SELECT 1 FROM company WHERE name = 'Bralis');
 
 INSERT INTO artikl (id, sifra, naziv, jedinica, stanje, cijena)
 SELECT nextval('artikl_seq'), 'X', 'X', 'X', 0, 0
-WHERE NOT EXISTS (SELECT 1 FROM artikl WHERE name = 'X');
+WHERE NOT EXISTS (SELECT 1 FROM artikl WHERE naziv = 'X');
 
 INSERT INTO app_user (id, username, password, role, company)
 SELECT nextval('user_seq'), 'staka99', '$2a$12$sBaK1/urTjFs7bQPj92MvOlo1p03DCShAcfQY.20MluQRZEMwT6lq', 'ADMIN', 1
