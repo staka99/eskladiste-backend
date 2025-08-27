@@ -6,6 +6,10 @@ INSERT INTO company (id, name)
 SELECT nextval('company_seq'), 'Bralis'
 WHERE NOT EXISTS (SELECT 1 FROM company WHERE name = 'Bralis');
 
+INSERT INTO stanje (id, datum, stanje, company)
+SELECT nextval('stanje_seq'), '26.03.2025.', 111, 2
+WHERE NOT EXISTS (SELECT 1 FROM stanje WHERE datum = '26.03.2025.');
+
 INSERT INTO artikl (id, sifra, naziv, jedinica, stanje, cijena, company)
 SELECT nextval('artikl_seq'), 'Test X', 'Test X', 'X', 0, 0, 2
 WHERE NOT EXISTS (SELECT 1 FROM artikl WHERE naziv = 'Test X');

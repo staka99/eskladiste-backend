@@ -58,5 +58,9 @@ public class Company{
     @OneToMany(mappedBy="company")
 	@JsonIgnore
 	private List<Artikl> artikli;
+    
+    @OneToMany(mappedBy="company")
+	@JsonIgnore
+	private List<Stanje> stanja;
 
 }
